@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.codeengine.service">
+	<author>ces</author>
+	<namespace>GB</namespace>
+    <entity name="Student" local-service="true" uuid="true">
+        <column name="userId" primary="true" type="long"></column>
+        <column name="name" type="String"></column>
+        <column name="email" type="String"></column>
+        <column name="createDate" type="Date"></column>
+        <column name="schoolId" type="long"></column>
+        <column name="clazzId" type="long"></column>
+    </entity>
+    <entity name="Clazz" local-service="true" uuid="true">
+        <column name="clazzId" type="long" primary="true"></column>
+        <column name="clazzName" type="String"></column>
+    </entity>
+    <entity name="School" local-service="true" uuid="true">
+        <column name="schoolId" type="long" primary="true"></column>
+        <column name="schoolName" type="String"></column>
+    </entity>
+</service-builder>

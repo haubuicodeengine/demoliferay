@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="com.codeengine.service.service.persistence.StudentFinder.findByName">
+	<![CDATA[
+		SELECT GB_Student.*
+		FROM GB_Student
+		WHERE GB_Student.name LIKE ?
+	]]>
+	</sql>
+</custom-sql>
