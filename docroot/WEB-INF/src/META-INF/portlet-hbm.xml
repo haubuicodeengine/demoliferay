@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.codeengine.service.model.Clazz" />
+	<import class="com.codeengine.service.model.School" />
+	<import class="com.codeengine.service.model.Student" />
+	<class name="com.codeengine.service.model.impl.ClazzImpl" table="GB_Clazz">
+		<cache usage="read-write" />
+		<id name="clazzId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="clazzName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.codeengine.service.model.impl.SchoolImpl" table="GB_School">
+		<cache usage="read-write" />
+		<id name="schoolId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="schoolName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.codeengine.service.model.impl.StudentImpl" table="GB_Student">
+		<cache usage="read-write" />
+		<id name="userId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="schoolId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="clazzId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

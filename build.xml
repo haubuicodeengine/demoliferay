@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+
+<project name="projPortlet2-portlet" basedir="." default="deploy">
+	<import file="/home/ces/Downloads/liferay_plugin_sdk/liferay-plugins-sdk-6.2-ce-ga6-20171101150212422/liferay-plugins-sdk-6.2/portlets/build-common-portlet.xml" />
+</project>
