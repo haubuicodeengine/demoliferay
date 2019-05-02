@@ -16,7 +16,7 @@
 	<aui:model-context bean="<%= student %>" model="<%= Student.class %>" />
 	<aui:fieldset>
 		<aui:input name="studentId" type="hidden"
-			value="<%= student != null ? student.getUserId() : -1 %>" />
+			value="<%= Validator.isNotNull(student) ? student.getUserId() : -1 %>" />
 		<aui:input name="name">
 			<aui:validator name="required" errorMessage="inputName" />
 		</aui:input>

@@ -14,12 +14,11 @@
 
 <%@ page import="com.codeengine.util.WebKeys"%>
 
-<%@ page import="com.codeengine.service.model.Student"%>
+<%@ page import="com.codeengine.StudentManagement.model.Student"%>
 <%@ page
-	import="com.codeengine.service.service.permission.StudentModelPermission"%>
-<%@page import="com.codeengine.service.service.StudentLocalServiceUtil"%>
-
+	import="com.codeengine.StudentManagement.service.permission.StudentPermission"%>
+<%@page import="com.codeengine.StudentManagement.service.StudentLocalServiceUtil"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
 <portlet:defineObjects />
 <theme:defineObjects />
 
-<script src="<%=request.getContextPath()%>/js/jquery-1.9.1.min.js" ></script>

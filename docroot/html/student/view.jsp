@@ -5,9 +5,7 @@
 	String search_keyword_name = (String) request
 			.getAttribute("search_name");
 %>
-This is the
-<b>Student</b>
-portlet in View mode.
+This is the <b>Student</b> portlet in View mode.
 
 <portlet:actionURL name="searchStudent" var="searchAction">
 </portlet:actionURL>
@@ -16,7 +14,7 @@ portlet in View mode.
 		<span class="aui-search-bar"> <aui:input
 				inlineField="<%=true%>" label="" name="search_name" size="30"
 				title="search-entries" type="text" value="<%=search_keyword_name%>" />
-			<aui:button type="submit" value="Search" />
+			<aui:button type="submit" value="searchLabel" />
 		</span>
 	</div>
 </aui:form>
@@ -24,7 +22,7 @@ portlet in View mode.
 <liferay-ui:search-container>
 	<liferay-ui:search-container-results results="<%= listStudents %>"></liferay-ui:search-container-results>
 	<liferay-ui:search-container-row
-		className="com.codeengine.service.model.Student" modelVar="student">
+		className="com.codeengine.StudentManagement.model.Student" modelVar="student">
 		<liferay-ui:search-container-column-text property="name" />
 		<liferay-ui:search-container-column-text property="email" />
 		<liferay-ui:search-container-column-jsp
@@ -33,19 +31,13 @@ portlet in View mode.
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
 <c:if
-	test='<%= StudentModelPermission.contains(permissionChecker,
+	test='<%= StudentPermission.contains(permissionChecker,
 						scopeGroupId, "ADD_STUDENT") %>'>
 	<aui:button-row cssClass="student-buttons">
 		<portlet:renderURL var="addStudentURL">
 			<portlet:param name="mvcPath" value="/html/student/edit.jsp"></portlet:param>
 		</portlet:renderURL>
 		<aui:button onClick="<%= addStudentURL.toString() %>"
-			value="Add Student"></aui:button>
+			value="addLabel"></aui:button>
 	</aui:button-row>
 </c:if>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-	    console.log("add javascript success!");
-	});
-</script>
