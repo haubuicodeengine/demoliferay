@@ -5,7 +5,6 @@
 	String search_keyword_name = (String) request
 			.getAttribute("search_name");
 %>
-This is the <b>Student</b> portlet in View mode.
 
 <portlet:actionURL name="searchStudent" var="searchAction">
 </portlet:actionURL>
@@ -22,7 +21,7 @@ This is the <b>Student</b> portlet in View mode.
 <liferay-ui:search-container>
 	<liferay-ui:search-container-results results="<%= listStudents %>"></liferay-ui:search-container-results>
 	<liferay-ui:search-container-row
-		className="com.codeengine.StudentManagement.model.Student" modelVar="student">
+		className="com.codeengine.studentmanagement.model.Student" modelVar="student">
 		<liferay-ui:search-container-column-text property="name" />
 		<liferay-ui:search-container-column-text property="email" />
 		<liferay-ui:search-container-column-jsp

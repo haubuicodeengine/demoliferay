@@ -34,7 +34,7 @@
 	<portlet>
 		<portlet-name>student</portlet-name>
 		<display-name>Student</display-name>
-		<portlet-class>com.codeengine.StudentManagement.Portlet.StudentPortlet</portlet-class>
+		<portlet-class>com.codeengine.studentmanagement.portlet.StudentPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/html/student/view.jsp</value>

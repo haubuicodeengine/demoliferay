@@ -3,7 +3,7 @@
 "http://www.liferay.com/dtd/liferay-resource-action-mapping_6_2_0.dtd">
 <resource-action-mapping>
 	<model-resource>
-		<model-name>com.codeengine.StudentManagement.model.Student</model-name>
+		<model-name>com.codeengine.studentmanagement.model.Student</model-name>
 		<portlet-ref>
 			<portlet-name>student</portlet-name>
 		</portlet-ref>
