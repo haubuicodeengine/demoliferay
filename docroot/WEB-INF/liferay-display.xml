@@ -5,6 +5,5 @@
 	<category name="category.sample">
 		<portlet id="projPortlet2" />
 		<portlet id="student"></portlet>
-		<portlet id="teacher"></portlet>
 	</category>
 </display>

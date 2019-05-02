@@ -114,9 +114,12 @@ public class StudentLocalServiceClp implements StudentLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getAll";
+		_methodName19 = "addStudentManual";
 
-		_methodParameterTypes19 = new String[] {  };
+		_methodParameterTypes19 = new String[] {
+				"java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName20 = "deleteStudent";
 
@@ -124,23 +127,20 @@ public class StudentLocalServiceClp implements StudentLocalService {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName21 = "updateStudent";
+		_methodName21 = "findByName";
 
-		_methodParameterTypes21 = new String[] {
+		_methodParameterTypes21 = new String[] { "java.lang.String" };
+
+		_methodName22 = "getAll";
+
+		_methodParameterTypes22 = new String[] {  };
+
+		_methodName23 = "updateStudent";
+
+		_methodParameterTypes23 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
-
-		_methodName22 = "addStudentManual";
-
-		_methodParameterTypes22 = new String[] {
-				"java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName23 = "findByName";
-
-		_methodParameterTypes23 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -695,117 +695,6 @@ public class StudentLocalServiceClp implements StudentLocalService {
 	}
 
 	@Override
-	public java.util.List<com.codeengine.service.model.Student> getAll()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName19,
-					_methodParameterTypes19, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<com.codeengine.service.model.Student>)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public com.codeengine.service.model.Student deleteStudent(long studentId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
-					new Object[] {
-						studentId,
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.codeengine.service.model.Student)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public com.codeengine.service.model.Student updateStudent(long studentId,
-		java.lang.String name, java.lang.String email,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.codeengine.service.NoSuchStudentException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21,
-					new Object[] {
-						studentId,
-						
-					ClpSerializer.translateInput(name),
-						
-					ClpSerializer.translateInput(email),
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.codeengine.service.NoSuchStudentException) {
-				throw (com.codeengine.service.NoSuchStudentException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.codeengine.service.model.Student)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
 	public com.codeengine.service.model.Student addStudentManual(
 		java.lang.String name, java.lang.String email,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -815,8 +704,8 @@ public class StudentLocalServiceClp implements StudentLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22,
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
 					new Object[] {
 						ClpSerializer.translateInput(name),
 						
@@ -853,13 +742,48 @@ public class StudentLocalServiceClp implements StudentLocalService {
 	}
 
 	@Override
+	public void deleteStudent(long studentId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName20,
+				_methodParameterTypes20,
+				new Object[] {
+					studentId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
 	public java.util.List<com.codeengine.service.model.Student> findByName(
 		java.lang.String name) throws java.lang.Exception {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName23,
-					_methodParameterTypes23,
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] { ClpSerializer.translateInput(name) });
 		}
 		catch (Throwable t) {
@@ -879,6 +803,78 @@ public class StudentLocalServiceClp implements StudentLocalService {
 		}
 
 		return (java.util.List<com.codeengine.service.model.Student>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.codeengine.service.model.Student> getAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.codeengine.service.model.Student>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.codeengine.service.model.Student updateStudent(long studentId,
+		java.lang.String name, java.lang.String email,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.codeengine.service.NoSuchStudentException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
+					new Object[] {
+						studentId,
+						
+					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(email),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.codeengine.service.NoSuchStudentException) {
+				throw (com.codeengine.service.NoSuchStudentException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.codeengine.service.model.Student)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableLocalService _invokableLocalService;

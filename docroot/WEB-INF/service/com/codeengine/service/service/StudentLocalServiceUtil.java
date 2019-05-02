@@ -276,21 +276,46 @@ public class StudentLocalServiceUtil {
 	}
 
 	/**
-	* Get all students
+	* Add new student
+	*
+	* @param name
+	* @param email
+	* @return
+	* @throws SystemException
 	*/
-	public static java.util.List<com.codeengine.service.model.Student> getAll()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAll();
+	public static com.codeengine.service.model.Student addStudentManual(
+		java.lang.String name, java.lang.String email,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().addStudentManual(name, email, serviceContext);
 	}
 
 	/**
 	* Delete student
 	*/
-	public static com.codeengine.service.model.Student deleteStudent(
-		long studentId, com.liferay.portal.service.ServiceContext serviceContext)
+	public static void deleteStudent(long studentId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteStudent(studentId, serviceContext);
+		getService().deleteStudent(studentId, serviceContext);
+	}
+
+	/**
+	* Find By Name
+	*/
+	public static java.util.List<com.codeengine.service.model.Student> findByName(
+		java.lang.String name) throws java.lang.Exception {
+		return getService().findByName(name);
+	}
+
+	/**
+	* Get all students
+	*/
+	public static java.util.List<com.codeengine.service.model.Student> getAll()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAll();
 	}
 
 	/**
@@ -310,31 +335,6 @@ public class StudentLocalServiceUtil {
 		throws com.codeengine.service.NoSuchStudentException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateStudent(studentId, name, email, serviceContext);
-	}
-
-	/**
-	* Add new student
-	*
-	* @param name
-	* @param email
-	* @return
-	* @throws SystemException
-	*/
-	public static com.codeengine.service.model.Student addStudentManual(
-		java.lang.String name, java.lang.String email,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addStudentManual(name, email, serviceContext);
-	}
-
-	/**
-	* Find By Name
-	*/
-	public static java.util.List<com.codeengine.service.model.Student> findByName(
-		java.lang.String name) throws java.lang.Exception {
-		return getService().findByName(name);
 	}
 
 	public static void clearService() {

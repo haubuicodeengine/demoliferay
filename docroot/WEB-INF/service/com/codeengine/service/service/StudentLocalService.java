@@ -253,19 +253,40 @@ public interface StudentLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	/**
+	* Add new student
+	*
+	* @param name
+	* @param email
+	* @return
+	* @throws SystemException
+	*/
+	public com.codeengine.service.model.Student addStudentManual(
+		java.lang.String name, java.lang.String email,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Delete student
+	*/
+	public void deleteStudent(long studentId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Find By Name
+	*/
+	public java.util.List<com.codeengine.service.model.Student> findByName(
+		java.lang.String name) throws java.lang.Exception;
+
+	/**
 	* Get all students
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.codeengine.service.model.Student> getAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Delete student
-	*/
-	public com.codeengine.service.model.Student deleteStudent(long studentId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Update student
@@ -283,25 +304,4 @@ public interface StudentLocalService extends BaseLocalService,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.codeengine.service.NoSuchStudentException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Add new student
-	*
-	* @param name
-	* @param email
-	* @return
-	* @throws SystemException
-	*/
-	public com.codeengine.service.model.Student addStudentManual(
-		java.lang.String name, java.lang.String email,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.NoSuchUserException,
-			com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Find By Name
-	*/
-	public java.util.List<com.codeengine.service.model.Student> findByName(
-		java.lang.String name) throws java.lang.Exception;
 }

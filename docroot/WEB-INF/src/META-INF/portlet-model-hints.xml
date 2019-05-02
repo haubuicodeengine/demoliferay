@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<model name="com.codeengine.service.model.Clazz">
+	<model name="com.codeengine.StudentManagement.model.Clazz">
 		<field name="uuid" type="String" />
 		<field name="clazzId" type="long" />
 		<field name="clazzName" type="String" />
 	</model>
-	<model name="com.codeengine.service.model.School">
+	<model name="com.codeengine.StudentManagement.model.School">
 		<field name="uuid" type="String" />
 		<field name="schoolId" type="long" />
 		<field name="schoolName" type="String" />
 	</model>
-	<model name="com.codeengine.service.model.Student">
+	<model name="com.codeengine.StudentManagement.model.Student">
 		<field name="uuid" type="String" />
 		<field name="userId" type="long" />
 		<field name="name" type="String" />
