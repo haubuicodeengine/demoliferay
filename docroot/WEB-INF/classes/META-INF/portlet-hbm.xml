@@ -2,10 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
-	<import class="com.codeengine.StudentManagement.model.Clazz" />
-	<import class="com.codeengine.StudentManagement.model.School" />
-	<import class="com.codeengine.StudentManagement.model.Student" />
-	<class name="com.codeengine.StudentManagement.model.impl.ClazzImpl" table="GB_Clazz">
+	<import class="com.codeengine.studentmanagement.model.Clazz" />
+	<import class="com.codeengine.studentmanagement.model.School" />
+	<import class="com.codeengine.studentmanagement.model.Student" />
+	<class name="com.codeengine.studentmanagement.model.impl.ClazzImpl" table="GB_Clazz">
 		<cache usage="read-write" />
 		<id name="clazzId" type="long">
 			<generator class="assigned" />
@@ -13,7 +13,7 @@
 		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
 		<property name="clazzName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.codeengine.StudentManagement.model.impl.SchoolImpl" table="GB_School">
+	<class name="com.codeengine.studentmanagement.model.impl.SchoolImpl" table="GB_School">
 		<cache usage="read-write" />
 		<id name="schoolId" type="long">
 			<generator class="assigned" />
@@ -21,7 +21,7 @@
 		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
 		<property name="schoolName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.codeengine.StudentManagement.model.impl.StudentImpl" table="GB_Student">
+	<class name="com.codeengine.studentmanagement.model.impl.StudentImpl" table="GB_Student">
 		<cache usage="read-write" />
 		<id name="userId" type="long">
 			<generator class="assigned" />

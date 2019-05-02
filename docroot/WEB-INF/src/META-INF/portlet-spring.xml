@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="com.codeengine.StudentManagement.service.ClazzLocalService" class="com.codeengine.StudentManagement.service.impl.ClazzLocalServiceImpl" />
-	<bean id="com.codeengine.StudentManagement.service.ClazzService" class="com.codeengine.StudentManagement.service.impl.ClazzServiceImpl" />
-	<bean id="com.codeengine.StudentManagement.service.persistence.ClazzPersistence" class="com.codeengine.StudentManagement.service.persistence.ClazzPersistenceImpl" parent="basePersistence" />
-	<bean id="com.codeengine.StudentManagement.service.SchoolLocalService" class="com.codeengine.StudentManagement.service.impl.SchoolLocalServiceImpl" />
-	<bean id="com.codeengine.StudentManagement.service.SchoolService" class="com.codeengine.StudentManagement.service.impl.SchoolServiceImpl" />
-	<bean id="com.codeengine.StudentManagement.service.persistence.SchoolPersistence" class="com.codeengine.StudentManagement.service.persistence.SchoolPersistenceImpl" parent="basePersistence" />
-	<bean id="com.codeengine.StudentManagement.service.StudentLocalService" class="com.codeengine.StudentManagement.service.impl.StudentLocalServiceImpl" />
-	<bean id="com.codeengine.StudentManagement.service.StudentService" class="com.codeengine.StudentManagement.service.impl.StudentServiceImpl" />
-	<bean id="com.codeengine.StudentManagement.service.persistence.StudentPersistence" class="com.codeengine.StudentManagement.service.persistence.StudentPersistenceImpl" parent="basePersistence" />
-	<bean id="com.codeengine.StudentManagement.service.persistence.StudentFinder" class="com.codeengine.StudentManagement.service.persistence.StudentFinderImpl" parent="basePersistence" />
+	<bean id="com.codeengine.studentmanagement.service.ClazzLocalService" class="com.codeengine.studentmanagement.service.impl.ClazzLocalServiceImpl" />
+	<bean id="com.codeengine.studentmanagement.service.ClazzService" class="com.codeengine.studentmanagement.service.impl.ClazzServiceImpl" />
+	<bean id="com.codeengine.studentmanagement.service.persistence.ClazzPersistence" class="com.codeengine.studentmanagement.service.persistence.ClazzPersistenceImpl" parent="basePersistence" />
+	<bean id="com.codeengine.studentmanagement.service.SchoolLocalService" class="com.codeengine.studentmanagement.service.impl.SchoolLocalServiceImpl" />
+	<bean id="com.codeengine.studentmanagement.service.SchoolService" class="com.codeengine.studentmanagement.service.impl.SchoolServiceImpl" />
+	<bean id="com.codeengine.studentmanagement.service.persistence.SchoolPersistence" class="com.codeengine.studentmanagement.service.persistence.SchoolPersistenceImpl" parent="basePersistence" />
+	<bean id="com.codeengine.studentmanagement.service.StudentLocalService" class="com.codeengine.studentmanagement.service.impl.StudentLocalServiceImpl" />
+	<bean id="com.codeengine.studentmanagement.service.StudentService" class="com.codeengine.studentmanagement.service.impl.StudentServiceImpl" />
+	<bean id="com.codeengine.studentmanagement.service.persistence.StudentPersistence" class="com.codeengine.studentmanagement.service.persistence.StudentPersistenceImpl" parent="basePersistence" />
+	<bean id="com.codeengine.studentmanagement.service.persistence.StudentFinder" class="com.codeengine.studentmanagement.service.persistence.StudentFinderImpl" parent="basePersistence" />
 </beans>

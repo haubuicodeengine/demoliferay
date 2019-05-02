@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <custom-sql>
-	<sql id="com.codeengine.StudentManagement.service.persistence.StudentFinder.findByName">
+	<sql id="com.codeengine.studentmanagement.service.persistence.StudentFinder.findByName">
 	<![CDATA[
 		SELECT GB_Student.*
 		FROM GB_Student

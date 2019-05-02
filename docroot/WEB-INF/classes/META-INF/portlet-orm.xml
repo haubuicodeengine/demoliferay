@@ -7,7 +7,7 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-	<mapped-superclass class="com.codeengine.StudentManagement.model.impl.ClazzModelImpl">
+	<mapped-superclass class="com.codeengine.studentmanagement.model.impl.ClazzModelImpl">
 		<attributes>
 			<id name="clazzId" />
 			<basic name="uuid">
@@ -19,7 +19,7 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.codeengine.StudentManagement.model.impl.SchoolModelImpl">
+	<mapped-superclass class="com.codeengine.studentmanagement.model.impl.SchoolModelImpl">
 		<attributes>
 			<id name="schoolId" />
 			<basic name="uuid">
@@ -31,7 +31,7 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.codeengine.StudentManagement.model.impl.StudentModelImpl">
+	<mapped-superclass class="com.codeengine.studentmanagement.model.impl.StudentModelImpl">
 		<attributes>
 			<id name="userId" />
 			<basic name="uuid">
@@ -59,6 +59,18 @@
 		<attributes />
 	</entity>
 	<entity class="com.codeengine.StudentManagement.model.impl.StudentImpl" name="Student">
+		<table name="GB_Student" />
+		<attributes />
+	</entity>
+	<entity class="com.codeengine.studentmanagement.model.impl.ClazzImpl" name="Clazz">
+		<table name="GB_Clazz" />
+		<attributes />
+	</entity>
+	<entity class="com.codeengine.studentmanagement.model.impl.SchoolImpl" name="School">
+		<table name="GB_School" />
+		<attributes />
+	</entity>
+	<entity class="com.codeengine.studentmanagement.model.impl.StudentImpl" name="Student">
 		<table name="GB_Student" />
 		<attributes />
 	</entity>
