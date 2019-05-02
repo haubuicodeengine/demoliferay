@@ -18,5 +18,5 @@ public class StudentPermission {
 				actionId);
 	}
 
-	public static final String RESOURCE_NAME = "com.codeengine.studentmanagement.model.Student";
+	private static final String RESOURCE_NAME = "com.codeengine.studentmanagement.model.Student";
 }
