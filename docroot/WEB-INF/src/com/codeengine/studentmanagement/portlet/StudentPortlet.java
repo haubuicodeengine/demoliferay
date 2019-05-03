@@ -9,7 +9,6 @@ import com.codeengine.studentmanagement.model.Student;
 import com.codeengine.studentmanagement.service.StudentLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -41,8 +40,7 @@ public class StudentPortlet extends MVCPortlet {
 			SessionMessages.add(request, "success");
 		} catch (Exception e) {
 			SessionErrors.add(request, "error");
-			response.setRenderParameter("errorMessage",
-					LanguageUtil.get(request.getLocale(), e.getMessage()));
+			response.setRenderParameter("errorMessage",e.getMessage());
 			PortalUtil.copyRequestParameters(request, response);
 			response.setRenderParameter("mvcPath", "/html/student/edit.jsp");
 		}
