@@ -1,7 +1,7 @@
 <%@include file="/html/init.jsp"%>
 
 <%
-	String mvcPath = ParamUtil.getString(request, "mvcPath");
+	//String mvcPath = ParamUtil.getString(request, "mvcPath");
 
 	ResultRow row = (ResultRow) request
 			.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);

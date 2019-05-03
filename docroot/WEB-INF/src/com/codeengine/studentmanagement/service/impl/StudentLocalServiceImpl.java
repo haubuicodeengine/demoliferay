@@ -98,8 +98,12 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 			throws PortalException {
 		if (Validator.isNull(name)) {
 			throw new PortalException("please.enter.name");
+		} else if (name.length() > 10 || name.length() < 3) {
+			throw new PortalException("name.must.from.3.to.10.character");
 		} else if (Validator.isNull(email)) {
 			throw new PortalException("please.enter.email");
+		} else if (!Validator.isEmailAddress(email)) {
+			throw new PortalException("please.enter.correct.email.format");
 		}
 	}
 }

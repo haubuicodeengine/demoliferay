@@ -13,6 +13,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -40,9 +41,9 @@ public class StudentPortlet extends MVCPortlet {
 			SessionMessages.add(request, "success");
 		} catch (Exception e) {
 			SessionErrors.add(request, "error");
-			response.setRenderParameter("errorMessage",e.getMessage());
+			response.setRenderParameter("errorMessage", e.getMessage());
 			PortalUtil.copyRequestParameters(request, response);
-			response.setRenderParameter("mvcPath", "/html/student/edit.jsp");
+			response.setRenderParameter("mvcPath", EDIT_URL);
 		}
 	}
 
@@ -69,8 +70,8 @@ public class StudentPortlet extends MVCPortlet {
 			RenderResponse renderResponse) throws PortletException, IOException {
 		try {
 			PortletPreferences prefs = renderRequest.getPreferences();
-			String searchName = GetterUtil.getString(
-					prefs.getValue(SEARCH_NAME, null), null);
+			String searchName = GetterUtil.getString(prefs.getValue(
+					SEARCH_NAME, StringPool.BLANK));
 			List<Student> students = new ArrayList<>();
 			if (Validator.isNotNull(searchName)) {
 				prefs.reset(SEARCH_NAME);
@@ -102,5 +103,6 @@ public class StudentPortlet extends MVCPortlet {
 		prefs.store();
 	}
 
+	private static final String EDIT_URL = "/html/student/edit.jsp";
 	private static final String SEARCH_NAME = "search_name";
 }
