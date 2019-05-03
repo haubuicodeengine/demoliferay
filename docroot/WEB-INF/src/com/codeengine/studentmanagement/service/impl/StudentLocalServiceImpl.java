@@ -53,15 +53,12 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * @throws SystemException
 	 * @throws PortalException
 	 */
-	public Student addOrUpdateStudent(Long studentId, String name, String email)
-			throws SystemException, PortalException {
-		validateStudent(name, email);
-		Student student;
-		if (Validator.isNull(studentId)) {
+	public Student addOrUpdateStudent(long studentId, String name, String email)
+			throws SystemException {
+		Student student = studentPersistence.fetchByPrimaryKey(studentId);
+		if (Validator.isNull(student)) {
 			student = studentPersistence
 					.create(counterLocalService.increment());
-		} else {
-			student = studentPersistence.findByPrimaryKey(studentId);
 		}
 		student.setName(name);
 		student.setEmail(email);
@@ -87,19 +84,5 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 */
 	public List<Student> getAll() throws SystemException {
 		return studentPersistence.findAll();
-	}
-
-	/**
-	 * Validate require data
-	 * 
-	 * @param name
-	 * @param email
-	 * @throws PortalException
-	 */
-	private void validateStudent(String name, String email)
-			throws PortalException {
-		if (Validator.isNull(name) || Validator.isNull(email)) {
-			throw new PortalException("Missing require field");
-		}
 	}
 }

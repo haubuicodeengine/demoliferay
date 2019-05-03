@@ -25,7 +25,6 @@ public class StudentFinderImpl extends BasePersistenceImpl<Student> implements
 	 */
 
 	public List<Student> findByName(String name, int begin, int end) {
-		List<Student> result = new ArrayList<>();
 		Session session = null;
 		try {
 			session = openSession();
@@ -40,21 +39,18 @@ public class StudentFinderImpl extends BasePersistenceImpl<Student> implements
 			if (Validator.isNotNull(name)) {
 				qPos.add("%" + name + "%");
 			}
-			result = (List<Student>) QueryUtil
-					.list(q, getDialect(), begin, end);
+			return (List<Student>) QueryUtil.list(q, getDialect(), begin, end);
 		} catch (Exception e) {
 			throw e;
 		} finally {
 			closeSession(session);
 		}
-		return result;
 	}
 
 	/**
 	 * Find by Name using DynamicQuery
 	 */
 	public List<Student> findByNameDynamicQuery(String name) throws Exception {
-		List<Student> result = new ArrayList<>();
 		Session session = null;
 		try {
 			session = openSession();
@@ -64,13 +60,13 @@ public class StudentFinderImpl extends BasePersistenceImpl<Student> implements
 				studentQuery.add(RestrictionsFactoryUtil.like("name", "%"
 						+ name + "%"));
 			}
-			result = StudentLocalServiceUtil.dynamicQuery(studentQuery);
+			return (List<Student>) StudentLocalServiceUtil
+					.dynamicQuery(studentQuery);
 		} catch (Exception e) {
 			throw e;
 		} finally {
 			closeSession(session);
 		}
-		return result;
 	}
 
 	private static final String FIND_BY_NAME = StudentFinder.class.getName()

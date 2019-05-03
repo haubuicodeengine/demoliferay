@@ -36,6 +36,7 @@ public class StudentPortlet extends MVCPortlet {
 		String email = ParamUtil.getString(request, "email");
 		long studentId = ParamUtil.getLong(request, "studentId");
 		try {
+			validateStudent(name, email);
 			StudentLocalServiceUtil.addOrUpdateStudent(studentId, name, email);
 			SessionMessages.add(request, "StudentAddedOrUpdated");
 		} catch (Exception e) {
@@ -68,15 +69,15 @@ public class StudentPortlet extends MVCPortlet {
 			RenderResponse renderResponse) throws PortletException, IOException {
 		try {
 			PortletPreferences prefs = renderRequest.getPreferences();
-			String search_name = GetterUtil.getString(
+			String searchName = GetterUtil.getString(
 					prefs.getValue(SEARCH_NAME, null), null);
 			List<Student> listStudents = new ArrayList<>();
-			if (Validator.isNotNull(search_name)) {
+			if (Validator.isNotNull(searchName)) {
 				prefs.reset(SEARCH_NAME);
 				prefs.store();
-				renderRequest.setAttribute(SEARCH_NAME, search_name);
+				renderRequest.setAttribute(SEARCH_NAME, searchName);
 			}
-			listStudents = StudentLocalServiceUtil.findByName(search_name);
+			listStudents = StudentLocalServiceUtil.findByName(searchName);
 			renderRequest.setAttribute("listStudents", listStudents);
 		} catch (Exception e) {
 			SessionErrors.add(renderRequest, e.getClass().getName());
@@ -99,6 +100,22 @@ public class StudentPortlet extends MVCPortlet {
 		PortletPreferences prefs = request.getPreferences();
 		prefs.setValue(SEARCH_NAME, keyword);
 		prefs.store();
+	}
+
+	/**
+	 * Validate email and name
+	 * 
+	 * @param name
+	 * @param email
+	 * @throws PortalException
+	 */
+	private void validateStudent(String name, String email)
+			throws PortalException {
+		if (Validator.isNull(name)) {
+			throw new PortalException("Missing name field");
+		} else if (Validator.isNull(email)) {
+			throw new PortalException("Missing email field");
+		}
 	}
 
 	private static final String SEARCH_NAME = "search_name";

@@ -13,7 +13,7 @@
 		<span class="aui-search-bar"> <aui:input
 				inlineField="<%=true%>" label="" name="search_name" size="30"
 				title="search-entries" type="text" value="<%=search_keyword_name%>" />
-			<aui:button type="submit" value="searchLabel" />
+			<aui:button type="submit" value="search" />
 		</span>
 	</div>
 </aui:form>
@@ -37,6 +37,6 @@
 			<portlet:param name="mvcPath" value="/html/student/edit.jsp"></portlet:param>
 		</portlet:renderURL>
 		<aui:button onClick="<%= addStudentURL.toString() %>"
-			value="addLabel"></aui:button>
+			value="add.student"></aui:button>
 	</aui:button-row>
 </c:if>
