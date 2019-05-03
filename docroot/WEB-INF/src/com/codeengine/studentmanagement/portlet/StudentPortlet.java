@@ -33,8 +33,7 @@ public class StudentPortlet extends MVCPortlet {
 	 * @throws SystemException
 	 */
 	public void addOrUpdateStudent(
-		ActionRequest request, ActionResponse response)
-		throws PortalException {
+		ActionRequest request, ActionResponse response) {
 
 		String name = ParamUtil.getString(request, "name");
 		String email = ParamUtil.getString(request, "email");
