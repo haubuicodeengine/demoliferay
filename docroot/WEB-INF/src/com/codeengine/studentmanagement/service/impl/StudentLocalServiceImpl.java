@@ -23,19 +23,13 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * The implementation of the student local service.
- * 
- * <p>
- * All custom service methods should be put in this class. Whenever methods are
- * added, rerun ServiceBuilder to copy their definitions into the
+ * The implementation of the student local service. <p> All custom service
+ * methods should be put in this class. Whenever methods are added, rerun
+ * ServiceBuilder to copy their definitions into the
  * {@link com.codeengine.studentmanagement.service.StudentLocalService}
- * interface.
- * 
- * <p>
- * This is a local service. Methods of this service will not have security
- * checks based on the propagated JAAS credentials because this service can only
- * be accessed from within the same VM.
- * </p>
+ * interface. <p> This is a local service. Methods of this service will not have
+ * security checks based on the propagated JAAS credentials because this service
+ * can only be accessed from within the same VM. </p>
  * 
  * @author ces
  * @see com.codeengine.studentmanagement.service.base.StudentLocalServiceBaseImpl
@@ -54,12 +48,13 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * @throws PortalException
 	 */
 	public Student addOrUpdateStudent(long studentId, String name, String email)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
+
 		validateStudent(name, email);
 		Student student = studentPersistence.fetchByPrimaryKey(studentId);
 		if (Validator.isNull(student)) {
-			student = studentPersistence
-					.create(counterLocalService.increment());
+			student =
+				studentPersistence.create(counterLocalService.increment());
 		}
 		student.setName(name);
 		student.setEmail(email);
@@ -72,7 +67,9 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * 
 	 * @throws Exception
 	 */
-	public List<Student> findByName(String name) throws Exception {
+	public List<Student> findByName(String name)
+		throws Exception {
+
 		// return StudentFinderUtil.findByName(name, QueryUtil.ALL_POS,
 		// QueryUtil.ALL_POS);
 		return studentFinder.findByNameDynamicQuery(name);
@@ -83,7 +80,9 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * 
 	 * @throws SystemException
 	 */
-	public List<Student> getAll() throws SystemException {
+	public List<Student> getAll()
+		throws SystemException {
+
 		return studentPersistence.findAll();
 	}
 
@@ -95,14 +94,18 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * @throws PortalException
 	 */
 	private void validateStudent(String name, String email)
-			throws PortalException {
+		throws PortalException {
+
 		if (Validator.isNull(name)) {
 			throw new PortalException("please.enter.name");
-		} else if (name.length() > 10 || name.length() < 3) {
+		}
+		else if (name.length() > 10 || name.length() < 3) {
 			throw new PortalException("name.must.from.3.to.10.character");
-		} else if (Validator.isNull(email)) {
+		}
+		else if (Validator.isNull(email)) {
 			throw new PortalException("please.enter.email");
-		} else if (!Validator.isEmailAddress(email)) {
+		}
+		else if (!Validator.isEmailAddress(email)) {
 			throw new PortalException("please.enter.correct.email.format");
 		}
 	}

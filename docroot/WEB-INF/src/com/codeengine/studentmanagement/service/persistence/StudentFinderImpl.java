@@ -1,3 +1,4 @@
+
 package com.codeengine.studentmanagement.service.persistence;
 
 import java.util.ArrayList;
@@ -17,14 +18,15 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-public class StudentFinderImpl extends BasePersistenceImpl<Student> implements
-		StudentFinder {
+public class StudentFinderImpl extends BasePersistenceImpl<Student>
+	implements StudentFinder {
 
 	/**
 	 * Find by name
 	 */
 
 	public List<Student> findByName(String name, int begin, int end) {
+
 		Session session = null;
 		try {
 			session = openSession();
@@ -40,9 +42,11 @@ public class StudentFinderImpl extends BasePersistenceImpl<Student> implements
 				qPos.add("%" + name + "%");
 			}
 			return (List<Student>) QueryUtil.list(q, getDialect(), begin, end);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw e;
-		} finally {
+		}
+		finally {
 			closeSession(session);
 		}
 	}
@@ -50,25 +54,28 @@ public class StudentFinderImpl extends BasePersistenceImpl<Student> implements
 	/**
 	 * Find by Name using DynamicQuery
 	 */
-	public List<Student> findByNameDynamicQuery(String name) throws Exception {
+	public List<Student> findByNameDynamicQuery(String name)
+		throws Exception {
+
 		Session session = null;
 		try {
 			session = openSession();
-			DynamicQuery studentQuery = DynamicQueryFactoryUtil
-					.forClass(Student.class);
+			DynamicQuery studentQuery =
+				DynamicQueryFactoryUtil.forClass(Student.class);
 			if (Validator.isNotNull(name)) {
-				studentQuery.add(RestrictionsFactoryUtil.like("name", "%"
-						+ name + "%"));
+				studentQuery.add(RestrictionsFactoryUtil.like("name", "%" +
+					name + "%"));
 			}
-			return (List<Student>) StudentLocalServiceUtil
-					.dynamicQuery(studentQuery);
-		} catch (Exception e) {
+			return (List<Student>) StudentLocalServiceUtil.dynamicQuery(studentQuery);
+		}
+		catch (Exception e) {
 			throw e;
-		} finally {
+		}
+		finally {
 			closeSession(session);
 		}
 	}
 
-	private static final String FIND_BY_NAME = StudentFinder.class.getName()
-			+ ".findByName";
+	private static final String FIND_BY_NAME = StudentFinder.class.getName() +
+		".findByName";
 }

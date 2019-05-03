@@ -1,3 +1,4 @@
+
 package com.codeengine.studentmanagement.portlet;
 
 import java.io.IOException;
@@ -31,15 +32,18 @@ public class StudentPortlet extends MVCPortlet {
 	 * @throws PortalException
 	 * @throws SystemException
 	 */
-	public void addOrUpdateStudent(ActionRequest request,
-			ActionResponse response) throws PortalException, SystemException {
+	public void addOrUpdateStudent(
+		ActionRequest request, ActionResponse response)
+		throws PortalException {
+
 		String name = ParamUtil.getString(request, "name");
 		String email = ParamUtil.getString(request, "email");
 		long studentId = ParamUtil.getLong(request, "studentId");
 		try {
 			StudentLocalServiceUtil.addOrUpdateStudent(studentId, name, email);
 			SessionMessages.add(request, "success");
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			SessionErrors.add(request, "error");
 			response.setRenderParameter("errorMessage", e.getMessage());
 			PortalUtil.copyRequestParameters(request, response);
@@ -54,10 +58,12 @@ public class StudentPortlet extends MVCPortlet {
 	 * @param response
 	 */
 	public void deleteStudent(ActionRequest request, ActionResponse response) {
+
 		long studentId = ParamUtil.getLong(request, "studentId");
 		try {
 			StudentLocalServiceUtil.deleteStudent(studentId);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
 		}
 	}
@@ -66,11 +72,13 @@ public class StudentPortlet extends MVCPortlet {
 	 * Default render
 	 */
 	@Override
-	public void render(RenderRequest renderRequest,
-			RenderResponse renderResponse) throws PortletException, IOException {
+	public void render(
+		RenderRequest renderRequest, RenderResponse renderResponse) {
+
 		try {
 			PortletPreferences prefs = renderRequest.getPreferences();
-			String searchName = GetterUtil.getString(prefs.getValue(
+			String searchName =
+				GetterUtil.getString(prefs.getValue(
 					SEARCH_NAME, StringPool.BLANK));
 			List<Student> students = new ArrayList<>();
 			if (Validator.isNotNull(searchName)) {
@@ -80,10 +88,11 @@ public class StudentPortlet extends MVCPortlet {
 			}
 			students = StudentLocalServiceUtil.findByName(searchName);
 			renderRequest.setAttribute("students", students);
-		} catch (Exception e) {
+			super.render(renderRequest, renderResponse);
+		}
+		catch (Exception e) {
 			SessionErrors.add(renderRequest, e.getClass().getName());
 		}
-		super.render(renderRequest, renderResponse);
 	};
 
 	/**
@@ -96,11 +105,17 @@ public class StudentPortlet extends MVCPortlet {
 	 * @throws IOException
 	 */
 	public void searchStudent(ActionRequest request, ActionResponse response)
-			throws ReadOnlyException, ValidatorException, IOException {
-		String keyword = ParamUtil.getString(request, SEARCH_NAME);
-		PortletPreferences prefs = request.getPreferences();
-		prefs.setValue(SEARCH_NAME, keyword);
-		prefs.store();
+		throws PortalException {
+
+		try {
+			String keyword = ParamUtil.getString(request, SEARCH_NAME);
+			PortletPreferences prefs = request.getPreferences();
+			prefs.setValue(SEARCH_NAME, keyword);
+			prefs.store();
+		}
+		catch (Exception e) {
+			throw new PortalException(e.getMessage());
+		}
 	}
 
 	private static final String EDIT_URL = "/html/student/edit.jsp";
