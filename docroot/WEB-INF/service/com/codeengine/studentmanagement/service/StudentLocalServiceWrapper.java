@@ -296,7 +296,8 @@ public class StudentLocalServiceWrapper implements StudentLocalService,
 	@Override
 	public com.codeengine.studentmanagement.model.Student addOrUpdateStudent(
 		long studentId, java.lang.String name, java.lang.String email)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _studentLocalService.addOrUpdateStudent(studentId, name, email);
 	}
 
