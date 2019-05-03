@@ -6,6 +6,7 @@ import java.util.*;
 
 import javax.portlet.*;
 
+import com.codeengine.studentmanagement.exception.StudentException;
 import com.codeengine.studentmanagement.model.Student;
 import com.codeengine.studentmanagement.service.StudentLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -33,7 +34,8 @@ public class StudentPortlet extends MVCPortlet {
 	 * @throws SystemException
 	 */
 	public void addOrUpdateStudent(
-		ActionRequest request, ActionResponse response) {
+			ActionRequest request, ActionResponse response)
+		throws SystemException {
 
 		String name = ParamUtil.getString(request, "name");
 		String email = ParamUtil.getString(request, "email");
@@ -42,9 +44,12 @@ public class StudentPortlet extends MVCPortlet {
 			StudentLocalServiceUtil.addOrUpdateStudent(studentId, name, email);
 			SessionMessages.add(request, "success");
 		}
-		catch (Exception e) {
+		catch (PortalException e) {
 			SessionErrors.add(request, "error");
-			response.setRenderParameter("errorMessage", e.getMessage());
+			StudentException studentException = (StudentException) e;
+			for (String err : studentException.getErrors()) {
+				SessionErrors.add(request, err);
+			}
 			PortalUtil.copyRequestParameters(request, response);
 			response.setRenderParameter("mvcPath", EDIT_URL);
 		}

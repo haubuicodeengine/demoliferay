@@ -14,8 +14,10 @@
 
 package com.codeengine.studentmanagement.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.codeengine.studentmanagement.exception.StudentException;
 import com.codeengine.studentmanagement.model.Student;
 import com.codeengine.studentmanagement.service.base.StudentLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -48,7 +50,7 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * @throws PortalException
 	 */
 	public Student addOrUpdateStudent(long studentId, String name, String email)
-		throws PortalException, SystemException {
+		throws SystemException, PortalException {
 
 		validateStudent(name, email);
 		Student student = studentPersistence.fetchByPrimaryKey(studentId);
@@ -70,8 +72,6 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	public List<Student> findByName(String name)
 		throws Exception {
 
-		// return StudentFinderUtil.findByName(name, QueryUtil.ALL_POS,
-		// QueryUtil.ALL_POS);
 		return studentFinder.findByNameDynamicQuery(name);
 	}
 
@@ -96,17 +96,22 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	private void validateStudent(String name, String email)
 		throws PortalException {
 
+		List<String> errors = new ArrayList<>();
 		if (Validator.isNull(name)) {
-			throw new PortalException("please.enter.name");
+			errors.add("please.enter.name");
 		}
-		else if (name.length() > 10 || name.length() < 3) {
-			throw new PortalException("name.must.from.3.to.10.character");
+		if (name.length() > 10 || name.length() < 3) {
+			errors.add("name.must.from.3.to.10.character");
 		}
-		else if (Validator.isNull(email)) {
-			throw new PortalException("please.enter.email");
+		if (Validator.isNull(email)) {
+			errors.add("please.enter.email");
 		}
-		else if (!Validator.isEmailAddress(email)) {
-			throw new PortalException("please.enter.correct.email.format");
+		if (!Validator.isEmailAddress(email)) {
+			errors.add("please.enter.correct.email.format");
 		}
+		if (errors.size() > 0) {
+			throw new StudentException(errors);
+		}
+
 	}
 }

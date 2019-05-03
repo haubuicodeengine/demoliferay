@@ -1,9 +1,10 @@
 <%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
 <%@include file="/html/init.jsp"%>
-<%
-	String errorMessage = GetterUtil.getString(ParamUtil.getString(renderRequest, "errorMessage"), "");
-%>
-<liferay-ui:error key="error" message="<%= errorMessage %>" />
+
+<liferay-ui:error key="please.enter.name" message="please.enter.name"/>
+<liferay-ui:error key="name.must.from.3.to.10.character" message="name.must.from.3.to.10.character"/>
+<liferay-ui:error key="please.enter.email" message="please.enter.email"/>
+<liferay-ui:error key="please.enter.correct.email.format" message="please.enter.correct.email.format"/>
 <h4><liferay-ui:message key="add.edit.student"/></h4>
 <%
 	long studentId = ParamUtil.getLong(renderRequest, "studentId");

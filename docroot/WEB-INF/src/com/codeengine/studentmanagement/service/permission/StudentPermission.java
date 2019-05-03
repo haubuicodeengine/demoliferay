@@ -7,7 +7,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public class StudentPermission {
 
 	public static void check(
-		PermissionChecker permissionChecker, long groupId, String actionId)
+			PermissionChecker permissionChecker, long groupId, String actionId)
 		throws PrincipalException {
 
 		if (!contains(permissionChecker, groupId, actionId)) {
