@@ -117,7 +117,7 @@ public class StudentLocalServiceClpInvoker {
 		_methodName54 = "addOrUpdateStudent";
 
 		_methodParameterTypes54 = new String[] {
-				"java.lang.Long", "java.lang.String", "java.lang.String"
+				"long", "java.lang.String", "java.lang.String"
 			};
 
 		_methodName55 = "findByName";
@@ -232,7 +232,7 @@ public class StudentLocalServiceClpInvoker {
 
 		if (_methodName54.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
-			return StudentLocalServiceUtil.addOrUpdateStudent((java.lang.Long)arguments[0],
+			return StudentLocalServiceUtil.addOrUpdateStudent(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 		}
 

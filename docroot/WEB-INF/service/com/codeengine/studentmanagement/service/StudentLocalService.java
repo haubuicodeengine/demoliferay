@@ -264,9 +264,8 @@ public interface StudentLocalService extends BaseLocalService,
 	* @throws PortalException
 	*/
 	public com.codeengine.studentmanagement.model.Student addOrUpdateStudent(
-		java.lang.Long studentId, java.lang.String name, java.lang.String email)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		long studentId, java.lang.String name, java.lang.String email)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Find By Name

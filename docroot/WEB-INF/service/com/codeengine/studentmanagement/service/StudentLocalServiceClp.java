@@ -117,7 +117,7 @@ public class StudentLocalServiceClp implements StudentLocalService {
 		_methodName19 = "addOrUpdateStudent";
 
 		_methodParameterTypes19 = new String[] {
-				"java.lang.Long", "java.lang.String", "java.lang.String"
+				"long", "java.lang.String", "java.lang.String"
 			};
 
 		_methodName20 = "findByName";
@@ -680,16 +680,15 @@ public class StudentLocalServiceClp implements StudentLocalService {
 
 	@Override
 	public com.codeengine.studentmanagement.model.Student addOrUpdateStudent(
-		java.lang.Long studentId, java.lang.String name, java.lang.String email)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		long studentId, java.lang.String name, java.lang.String email)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
 					_methodParameterTypes19,
 					new Object[] {
-						ClpSerializer.translateInput(studentId),
+						studentId,
 						
 					ClpSerializer.translateInput(name),
 						
@@ -698,10 +697,6 @@ public class StudentLocalServiceClp implements StudentLocalService {
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
