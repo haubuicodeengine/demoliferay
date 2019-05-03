@@ -54,7 +54,8 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * @throws PortalException
 	 */
 	public Student addOrUpdateStudent(long studentId, String name, String email)
-			throws SystemException {
+			throws PortalException, SystemException {
+		validateStudent(name, email);
 		Student student = studentPersistence.fetchByPrimaryKey(studentId);
 		if (Validator.isNull(student)) {
 			student = studentPersistence
@@ -84,5 +85,21 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 */
 	public List<Student> getAll() throws SystemException {
 		return studentPersistence.findAll();
+	}
+
+	/**
+	 * Validate email and name
+	 * 
+	 * @param name
+	 * @param email
+	 * @throws PortalException
+	 */
+	private void validateStudent(String name, String email)
+			throws PortalException {
+		if (Validator.isNull(name)) {
+			throw new PortalException("please.enter.name");
+		} else if (Validator.isNull(email)) {
+			throw new PortalException("please.enter.email");
+		}
 	}
 }

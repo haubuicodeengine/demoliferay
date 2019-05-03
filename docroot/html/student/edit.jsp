@@ -1,4 +1,9 @@
+<%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
 <%@include file="/html/init.jsp"%>
+<%
+	String errorMessage = GetterUtil.getString(ParamUtil.getString(renderRequest, "errorMessage"), "");
+%>
+<liferay-ui:error key="error" message="<%= errorMessage %>" />
 <h4>Add/Edit Student</h4>
 <%
 	long studentId = ParamUtil.getLong(renderRequest, "studentId");
@@ -7,7 +12,6 @@
 		student = StudentLocalServiceUtil.getStudent(studentId);
 	}
 %>
-
 <portlet:renderURL var="listStudentURL">
 	<portlet:param name="mvcPath" value="/html/student/view.jsp"></portlet:param>
 </portlet:renderURL>

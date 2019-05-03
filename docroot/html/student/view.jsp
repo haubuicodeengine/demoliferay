@@ -1,11 +1,11 @@
 <%@include file="/html/init.jsp"%>
 <%
-	List<Student> listStudents = (List) request
-			.getAttribute("listStudents");
+	List<Student> students = (List<Student>) request
+			.getAttribute("students");
 	String search_keyword_name = (String) request
 			.getAttribute("search_name");
 %>
-
+<liferay-ui:success key="success" message="Update student success"/>
 <portlet:actionURL name="searchStudent" var="searchAction">
 </portlet:actionURL>
 <aui:form action="<%= searchAction %>">
@@ -19,7 +19,7 @@
 </aui:form>
 
 <liferay-ui:search-container>
-	<liferay-ui:search-container-results results="<%= listStudents %>"></liferay-ui:search-container-results>
+	<liferay-ui:search-container-results results="<%= students %>"></liferay-ui:search-container-results>
 	<liferay-ui:search-container-row
 		className="com.codeengine.studentmanagement.model.Student" modelVar="student">
 		<liferay-ui:search-container-column-text property="name" />

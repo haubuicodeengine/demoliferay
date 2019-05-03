@@ -9,6 +9,7 @@ import com.codeengine.studentmanagement.model.Student;
 import com.codeengine.studentmanagement.service.StudentLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -36,11 +37,12 @@ public class StudentPortlet extends MVCPortlet {
 		String email = ParamUtil.getString(request, "email");
 		long studentId = ParamUtil.getLong(request, "studentId");
 		try {
-			validateStudent(name, email);
 			StudentLocalServiceUtil.addOrUpdateStudent(studentId, name, email);
-			SessionMessages.add(request, "StudentAddedOrUpdated");
+			SessionMessages.add(request, "success");
 		} catch (Exception e) {
-			SessionErrors.add(request, e.getClass().getName());
+			SessionErrors.add(request, "error");
+			response.setRenderParameter("errorMessage",
+					LanguageUtil.get(request.getLocale(), e.getMessage()));
 			PortalUtil.copyRequestParameters(request, response);
 			response.setRenderParameter("mvcPath", "/html/student/edit.jsp");
 		}
@@ -71,14 +73,14 @@ public class StudentPortlet extends MVCPortlet {
 			PortletPreferences prefs = renderRequest.getPreferences();
 			String searchName = GetterUtil.getString(
 					prefs.getValue(SEARCH_NAME, null), null);
-			List<Student> listStudents = new ArrayList<>();
+			List<Student> students = new ArrayList<>();
 			if (Validator.isNotNull(searchName)) {
 				prefs.reset(SEARCH_NAME);
 				prefs.store();
 				renderRequest.setAttribute(SEARCH_NAME, searchName);
 			}
-			listStudents = StudentLocalServiceUtil.findByName(searchName);
-			renderRequest.setAttribute("listStudents", listStudents);
+			students = StudentLocalServiceUtil.findByName(searchName);
+			renderRequest.setAttribute("students", students);
 		} catch (Exception e) {
 			SessionErrors.add(renderRequest, e.getClass().getName());
 		}
@@ -100,22 +102,6 @@ public class StudentPortlet extends MVCPortlet {
 		PortletPreferences prefs = request.getPreferences();
 		prefs.setValue(SEARCH_NAME, keyword);
 		prefs.store();
-	}
-
-	/**
-	 * Validate email and name
-	 * 
-	 * @param name
-	 * @param email
-	 * @throws PortalException
-	 */
-	private void validateStudent(String name, String email)
-			throws PortalException {
-		if (Validator.isNull(name)) {
-			throw new PortalException("Missing name field");
-		} else if (Validator.isNull(email)) {
-			throw new PortalException("Missing email field");
-		}
 	}
 
 	private static final String SEARCH_NAME = "search_name";
