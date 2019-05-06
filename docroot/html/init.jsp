@@ -4,8 +4,10 @@
 <%@ page import="com.codeengine.util.WebKeys"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchEntry"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow"%>
+<%@page import="com.liferay.portal.kernel.util.GetterUtil"%>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@ page import="com.liferay.portal.kernel.util.Validator"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
@@ -17,4 +19,3 @@
 
 <portlet:defineObjects />
 <theme:defineObjects />
-

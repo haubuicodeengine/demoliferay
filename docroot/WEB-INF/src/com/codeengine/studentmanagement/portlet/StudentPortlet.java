@@ -45,11 +45,9 @@ public class StudentPortlet extends MVCPortlet {
 			SessionMessages.add(request, "success");
 		}
 		catch (PortalException e) {
-			SessionErrors.add(request, "error");
 			StudentException studentException = (StudentException) e;
-			for (String err : studentException.getErrors()) {
-				SessionErrors.add(request, err);
-			}
+			SessionErrors.add(request, "error");
+			request.setAttribute("errors", studentException.getErrors());
 			PortalUtil.copyRequestParameters(request, response);
 			response.setRenderParameter("mvcPath", EDIT_URL);
 		}
