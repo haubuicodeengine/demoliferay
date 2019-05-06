@@ -50,7 +50,7 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * @throws PortalException
 	 */
 	public Student addOrUpdateStudent(long studentId, String name, String email)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
 		validateStudent(name, email);
 		Student student = studentPersistence.fetchByPrimaryKey(studentId);
