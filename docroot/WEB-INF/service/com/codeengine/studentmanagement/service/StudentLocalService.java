@@ -292,8 +292,8 @@ public interface StudentLocalService extends BaseLocalService,
 	* @throws PortalException
 	*/
 	public com.codeengine.studentmanagement.model.Student addOrUpdateStudent(
-		long studentId, java.lang.String name, java.lang.String email,
-		long companyId)
+		long companyId, long studentId, java.lang.String name,
+		java.lang.String email)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -310,7 +310,7 @@ public interface StudentLocalService extends BaseLocalService,
 	* @throws Exception
 	*/
 	public java.util.List<com.codeengine.studentmanagement.model.Student> findByName(
-		java.lang.String name, long companyId) throws java.lang.Exception;
+		long companyId, java.lang.String name) throws java.lang.Exception;
 
 	/**
 	* Get all students

@@ -315,11 +315,11 @@ public class StudentLocalServiceUtil {
 	* @throws PortalException
 	*/
 	public static com.codeengine.studentmanagement.model.Student addOrUpdateStudent(
-		long studentId, java.lang.String name, java.lang.String email,
-		long companyId)
+		long companyId, long studentId, java.lang.String name,
+		java.lang.String email)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addOrUpdateStudent(studentId, name, email, companyId);
+		return getService().addOrUpdateStudent(companyId, studentId, name, email);
 	}
 
 	/**
@@ -337,8 +337,8 @@ public class StudentLocalServiceUtil {
 	* @throws Exception
 	*/
 	public static java.util.List<com.codeengine.studentmanagement.model.Student> findByName(
-		java.lang.String name, long companyId) throws java.lang.Exception {
-		return getService().findByName(name, companyId);
+		long companyId, java.lang.String name) throws java.lang.Exception {
+		return getService().findByName(companyId, name);
 	}
 
 	/**

@@ -125,7 +125,7 @@ public class StudentLocalServiceClp implements StudentLocalService {
 		_methodName21 = "addOrUpdateStudent";
 
 		_methodParameterTypes21 = new String[] {
-				"long", "java.lang.String", "java.lang.String", "long"
+				"long", "long", "java.lang.String", "java.lang.String"
 			};
 
 		_methodName22 = "deleteStudentIndexer";
@@ -134,7 +134,7 @@ public class StudentLocalServiceClp implements StudentLocalService {
 
 		_methodName23 = "findByName";
 
-		_methodParameterTypes23 = new String[] { "java.lang.String", "long" };
+		_methodParameterTypes23 = new String[] { "long", "java.lang.String" };
 
 		_methodName24 = "getAll";
 
@@ -757,8 +757,8 @@ public class StudentLocalServiceClp implements StudentLocalService {
 
 	@Override
 	public com.codeengine.studentmanagement.model.Student addOrUpdateStudent(
-		long studentId, java.lang.String name, java.lang.String email,
-		long companyId)
+		long companyId, long studentId, java.lang.String name,
+		java.lang.String email)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -767,13 +767,13 @@ public class StudentLocalServiceClp implements StudentLocalService {
 			returnObj = _invokableLocalService.invokeMethod(_methodName21,
 					_methodParameterTypes21,
 					new Object[] {
-						studentId,
+						companyId,
+						
+					studentId,
 						
 					ClpSerializer.translateInput(name),
 						
-					ClpSerializer.translateInput(email),
-						
-					companyId
+					ClpSerializer.translateInput(email)
 					});
 		}
 		catch (Throwable t) {
@@ -830,13 +830,13 @@ public class StudentLocalServiceClp implements StudentLocalService {
 
 	@Override
 	public java.util.List<com.codeengine.studentmanagement.model.Student> findByName(
-		java.lang.String name, long companyId) throws java.lang.Exception {
+		long companyId, java.lang.String name) throws java.lang.Exception {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName23,
 					_methodParameterTypes23,
-					new Object[] { ClpSerializer.translateInput(name), companyId });
+					new Object[] { companyId, ClpSerializer.translateInput(name) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

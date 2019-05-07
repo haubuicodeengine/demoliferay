@@ -125,7 +125,7 @@ public class StudentLocalServiceClpInvoker {
 		_methodName56 = "addOrUpdateStudent";
 
 		_methodParameterTypes56 = new String[] {
-				"long", "java.lang.String", "java.lang.String", "long"
+				"long", "long", "java.lang.String", "java.lang.String"
 			};
 
 		_methodName58 = "deleteStudentIndexer";
@@ -134,7 +134,7 @@ public class StudentLocalServiceClpInvoker {
 
 		_methodName59 = "findByName";
 
-		_methodParameterTypes59 = new String[] { "java.lang.String", "long" };
+		_methodParameterTypes59 = new String[] { "long", "java.lang.String" };
 
 		_methodName60 = "getAll";
 
@@ -257,8 +257,8 @@ public class StudentLocalServiceClpInvoker {
 		if (_methodName56.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return StudentLocalServiceUtil.addOrUpdateStudent(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				((Long)arguments[3]).longValue());
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3]);
 		}
 
 		if (_methodName58.equals(name) &&
@@ -270,8 +270,8 @@ public class StudentLocalServiceClpInvoker {
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
-			return StudentLocalServiceUtil.findByName((java.lang.String)arguments[0],
-				((Long)arguments[1]).longValue());
+			return StudentLocalServiceUtil.findByName(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName60.equals(name) &&

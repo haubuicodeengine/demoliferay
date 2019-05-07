@@ -328,12 +328,12 @@ public class StudentLocalServiceWrapper implements StudentLocalService,
 	*/
 	@Override
 	public com.codeengine.studentmanagement.model.Student addOrUpdateStudent(
-		long studentId, java.lang.String name, java.lang.String email,
-		long companyId)
+		long companyId, long studentId, java.lang.String name,
+		java.lang.String email)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _studentLocalService.addOrUpdateStudent(studentId, name, email,
-			companyId);
+		return _studentLocalService.addOrUpdateStudent(companyId, studentId,
+			name, email);
 	}
 
 	/**
@@ -353,8 +353,8 @@ public class StudentLocalServiceWrapper implements StudentLocalService,
 	*/
 	@Override
 	public java.util.List<com.codeengine.studentmanagement.model.Student> findByName(
-		java.lang.String name, long companyId) throws java.lang.Exception {
-		return _studentLocalService.findByName(name, companyId);
+		long companyId, java.lang.String name) throws java.lang.Exception {
+		return _studentLocalService.findByName(companyId, name);
 	}
 
 	/**
