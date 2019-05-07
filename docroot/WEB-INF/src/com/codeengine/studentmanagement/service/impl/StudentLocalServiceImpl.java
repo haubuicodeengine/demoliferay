@@ -14,14 +14,27 @@
 
 package com.codeengine.studentmanagement.service.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.codeengine.studentmanagement.exception.StudentException;
 import com.codeengine.studentmanagement.model.Student;
+import com.codeengine.studentmanagement.model.impl.StudentImpl;
 import com.codeengine.studentmanagement.service.base.StudentLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -49,7 +62,8 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * @throws SystemException
 	 * @throws PortalException
 	 */
-	public Student addOrUpdateStudent(long studentId, String name, String email)
+	public Student addOrUpdateStudent(
+			long studentId, String name, String email, long companyId)
 		throws PortalException, SystemException {
 
 		validateStudent(name, email);
@@ -60,8 +74,41 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 		}
 		student.setName(name);
 		student.setEmail(email);
+		student.setCompanyId(companyId);
 		updateStudent(student);
+
+		Indexer indexer =
+			IndexerRegistryUtil.nullSafeGetIndexer(Student.class.getName());
+		indexer.reindex(student);
 		return student;
+	}
+	
+	/**
+	 * Build search context
+	 * @param companyId
+	 * @return
+	 */
+	private SearchContext buildSearchContext(long companyId) {
+
+		SearchContext searchContext = new SearchContext();
+		searchContext.setAndSearch(true);
+		searchContext.setCompanyId(companyId);
+		QueryConfig queryConfig = new QueryConfig();
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+		searchContext.setQueryConfig(queryConfig);
+		return searchContext;
+	}
+	
+	/**
+	 * Delete student
+	 */
+	public void deleteStudentIndexer(long studentId)
+		throws PortalException, SystemException {
+
+		Student student = deleteStudent(studentId);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Student.class);
+		indexer.delete(student);
 	}
 
 	/**
@@ -69,10 +116,17 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * 
 	 * @throws Exception
 	 */
-	public List<Student> findByName(String name)
+	public List<Student> findByName(String name, long companyId)
 		throws Exception {
 
-		return studentFinder.findByNameDynamicQuery(name);
+		SearchContext searchContext = buildSearchContext(companyId);
+
+		Map<String, Serializable> attributes =
+			new HashMap<String, Serializable>();
+		attributes.put("name", name);
+		searchContext.setAttributes(attributes);
+
+		return getStudentFromSearchContext(searchContext);
 	}
 
 	/**
@@ -85,7 +139,41 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 
 		return studentPersistence.findAll();
 	}
+	
+	/**
+	 * Get all student from search context
+	 * @param searchContext
+	 * @return
+	 * @throws SearchException
+	 */
+	private List<Student> getStudentFromSearchContext(
+			SearchContext searchContext)
+		throws SearchException {
 
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Student.class);
+		List<Document> docs = indexer.search(searchContext).toList();
+
+		List<Student> result = new ArrayList<>();
+		for (int i = 0; i < docs.size(); i++) {
+			result.add(parseFromDocumentToStudent(docs.get(i)));
+		}
+		return result;
+	}
+	
+	/**
+	 * Parse from document to student
+	 * @param doc
+	 * @return
+	 */
+	private Student parseFromDocumentToStudent(Document doc) {
+
+		Student student = new StudentImpl();
+		student.setUserId(GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK)));
+		student.setName(GetterUtil.getString(doc.get("name")));
+		student.setEmail(GetterUtil.getString(doc.get("email")));
+		return student;
+	}
+	
 	/**
 	 * Validate email and name
 	 * 

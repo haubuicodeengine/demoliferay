@@ -10,6 +10,7 @@
         <column name="createDate" type="Date"></column>
         <column name="schoolId" type="long"></column>
         <column name="clazzId" type="long"></column>
+        <column name="companyId" type="long"></column>
     </entity>
     <entity name="Clazz" local-service="true" uuid="true">
         <column name="clazzId" type="long" primary="true"></column>

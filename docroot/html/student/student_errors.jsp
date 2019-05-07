@@ -1,6 +1,6 @@
 <%@include file="/html/init.jsp"%>
 <%
-	List<String> errors = (List<String>)GetterUtil.getObject(request.getAttribute("errors"), new ArrayList());
+	List<String> errors = (List<String>) request.getAttribute("errors");
 %>
 
 <c:forEach var="err" items="<%= errors %>">

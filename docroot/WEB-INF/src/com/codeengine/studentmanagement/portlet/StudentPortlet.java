@@ -5,12 +5,20 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.portlet.*;
+import javax.servlet.http.HttpServletRequest;
 
 import com.codeengine.studentmanagement.exception.StudentException;
 import com.codeengine.studentmanagement.model.Student;
 import com.codeengine.studentmanagement.service.StudentLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -35,13 +43,15 @@ public class StudentPortlet extends MVCPortlet {
 	 */
 	public void addOrUpdateStudent(
 			ActionRequest request, ActionResponse response)
-		throws SystemException {
+		throws SystemException, PortalException {
 
+		long companyId = PortalUtil.getCompanyId(request);
+		
 		String name = ParamUtil.getString(request, "name");
 		String email = ParamUtil.getString(request, "email");
 		long studentId = ParamUtil.getLong(request, "studentId");
 		try {
-			StudentLocalServiceUtil.addOrUpdateStudent(studentId, name, email);
+			StudentLocalServiceUtil.addOrUpdateStudent(studentId, name, email, companyId);
 			SessionMessages.add(request, "success");
 		}
 		catch (PortalException e) {
@@ -63,7 +73,7 @@ public class StudentPortlet extends MVCPortlet {
 
 		long studentId = ParamUtil.getLong(request, "studentId");
 		try {
-			StudentLocalServiceUtil.deleteStudent(studentId);
+			StudentLocalServiceUtil.deleteStudentIndexer(studentId);
 		}
 		catch (Exception e) {
 			SessionErrors.add(request, e.getClass().getName());
@@ -78,17 +88,18 @@ public class StudentPortlet extends MVCPortlet {
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
 		try {
+			long companyId = PortalUtil.getCompanyId(renderRequest);
 			PortletPreferences prefs = renderRequest.getPreferences();
 			String searchName =
 				GetterUtil.getString(prefs.getValue(
 					SEARCH_NAME, StringPool.BLANK));
-			List<Student> students = new ArrayList<>();
 			if (Validator.isNotNull(searchName)) {
 				prefs.reset(SEARCH_NAME);
 				prefs.store();
 				renderRequest.setAttribute(SEARCH_NAME, searchName);
 			}
-			students = StudentLocalServiceUtil.findByName(searchName);
+			List<Student> students =
+				StudentLocalServiceUtil.findByName(searchName, companyId);
 			renderRequest.setAttribute("students", students);
 			super.render(renderRequest, renderResponse);
 		}
