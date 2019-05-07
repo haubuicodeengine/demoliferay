@@ -54,8 +54,7 @@ public class StudentIndexer extends BaseIndexer {
 
 		Student student = (Student) obj;
 
-		deleteDocument(student.getCompanyId(), student.getUserId()); // need
-																		// recheck;
+		deleteDocument(student.getCompanyId(), student.getUserId());
 	}
 
 	@Override
@@ -92,7 +91,7 @@ public class StudentIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(
 			getSearchEngineId(), student.getCompanyId(), document);
 	}
-	
+
 	@Override
 	protected void doReindex(String[] ids)
 		throws Exception {
@@ -117,8 +116,8 @@ public class StudentIndexer extends BaseIndexer {
 
 	@Override
 	public boolean hasPermission(
-			PermissionChecker permissionChecker, String entryClassName,
-			long entryClassPK, String actionId)
+		PermissionChecker permissionChecker, String entryClassName,
+		long entryClassPK, String actionId)
 		throws Exception {
 
 		return StudentPermission.contains(
@@ -146,23 +145,23 @@ public class StudentIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocuments(
 			getSearchEngineId(), companyId, documents);
 	}
-	
+
 	@Override
 	public void postProcessSearchQuery(
 		BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
-	
+
 		addSearchTerm(searchQuery, searchContext, "name", false);
 		LinkedHashMap<String, Object> params =
-						(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+			(LinkedHashMap<String, Object>) searchContext.getAttribute("params");
 
-					if (params != null) {
-						String expandoAttributes = (String)params.get("expandoAttributes");
+		if (params != null) {
+			String expandoAttributes = (String) params.get("expandoAttributes");
 
-						if (Validator.isNotNull(expandoAttributes)) {
-							addSearchExpando(searchQuery, searchContext, expandoAttributes);
-						}
-					}
+			if (Validator.isNotNull(expandoAttributes)) {
+				addSearchExpando(searchQuery, searchContext, expandoAttributes);
+			}
+		}
 	}
 
 	public static final String[] CLASS_NAMES = {
