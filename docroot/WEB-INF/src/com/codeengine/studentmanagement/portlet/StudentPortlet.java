@@ -3,6 +3,8 @@ package com.codeengine.studentmanagement.portlet;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 import javax.portlet.*;
 import com.codeengine.studentmanagement.exception.StudentException;
 import com.codeengine.studentmanagement.model.Student;
@@ -30,10 +32,11 @@ public class StudentPortlet extends MVCPortlet {
 	 * @param response
 	 * @throws PortalException
 	 * @throws SystemException
+	 * @throws InterruptedException 
 	 */
 	public void addOrUpdateStudent(
 			ActionRequest request, ActionResponse response)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException, InterruptedException {
 
 		long companyId = PortalUtil.getCompanyId(request);
 		
@@ -41,7 +44,8 @@ public class StudentPortlet extends MVCPortlet {
 		String email = ParamUtil.getString(request, "email");
 		long studentId = ParamUtil.getLong(request, "studentId");
 		try {
-			StudentLocalServiceUtil.addOrUpdateStudent(studentId, name, email, companyId);
+			StudentLocalServiceUtil.addOrUpdateStudent(companyId, studentId, name, email);
+			TimeUnit.SECONDS.sleep(1);
 			SessionMessages.add(request, "success");
 		}
 		catch (PortalException e) {
@@ -89,7 +93,7 @@ public class StudentPortlet extends MVCPortlet {
 				renderRequest.setAttribute(SEARCH_NAME, searchName);
 			}
 			List<Student> students =
-				StudentLocalServiceUtil.findByName(searchName, companyId);
+				StudentLocalServiceUtil.findByName(companyId, searchName);
 			renderRequest.setAttribute("students", students);
 			super.render(renderRequest, renderResponse);
 		}

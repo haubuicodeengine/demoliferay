@@ -65,7 +65,7 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * @throws PortalException
 	 */
 	public Student addOrUpdateStudent(
-			long studentId, String name, String email, long companyId)
+			long companyId, long studentId, String name, String email)
 		throws PortalException, SystemException {
 
 		validateStudent(name, email);
@@ -119,7 +119,7 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * 
 	 * @throws Exception
 	 */
-	public List<Student> findByName(String name, long companyId)
+	public List<Student> findByName(long companyId, String name)
 		throws Exception {
 
 		SearchContext searchContext = buildSearchContext(companyId);
