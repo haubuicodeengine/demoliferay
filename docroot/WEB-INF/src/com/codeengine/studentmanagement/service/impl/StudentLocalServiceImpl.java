@@ -51,7 +51,9 @@ import com.liferay.portal.kernel.util.Validator;
  * @see com.codeengine.studentmanagement.service.StudentLocalServiceUtil
  */
 public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
+	
 
+	
 	/**
 	 * Add or update student
 	 * 
@@ -89,15 +91,16 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 	 * @return
 	 */
 	private SearchContext buildSearchContext(long companyId) {
-
-		SearchContext searchContext = new SearchContext();
-		searchContext.setAndSearch(true);
-		searchContext.setCompanyId(companyId);
-		QueryConfig queryConfig = new QueryConfig();
-		queryConfig.setHighlightEnabled(false);
-		queryConfig.setScoreEnabled(false);
-		searchContext.setQueryConfig(queryConfig);
-		return searchContext;
+		if(SEARCH_CONTEXT == null){
+			SEARCH_CONTEXT = new SearchContext();
+			SEARCH_CONTEXT.setAndSearch(true);
+			QueryConfig queryConfig = new QueryConfig();
+			queryConfig.setHighlightEnabled(false);
+			queryConfig.setScoreEnabled(false);
+			SEARCH_CONTEXT.setQueryConfig(queryConfig);
+		}
+		SEARCH_CONTEXT.setCompanyId(companyId);
+		return SEARCH_CONTEXT;
 	}
 	
 	/**
@@ -202,4 +205,6 @@ public class StudentLocalServiceImpl extends StudentLocalServiceBaseImpl {
 		}
 
 	}
+	
+	private static SearchContext SEARCH_CONTEXT = null;
 }

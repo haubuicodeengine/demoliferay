@@ -151,7 +151,7 @@ public class StudentIndexer extends BaseIndexer {
 		BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		addSearchTerm(searchQuery, searchContext, "name", false);
+		addSearchTerm(searchQuery, searchContext, "name", true);
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>) searchContext.getAttribute("params");
 
