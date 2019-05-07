@@ -188,6 +188,22 @@ public class StudentLocalServiceWrapper implements StudentLocalService,
 	}
 
 	/**
+	* Returns the student with the matching UUID and company.
+	*
+	* @param uuid the student's UUID
+	* @param companyId the primary key of the company
+	* @return the matching student, or <code>null</code> if a matching student could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public com.codeengine.studentmanagement.model.Student fetchStudentByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _studentLocalService.fetchStudentByUuidAndCompanyId(uuid,
+			companyId);
+	}
+
+	/**
 	* Returns the student with the primary key.
 	*
 	* @param userId the primary key of the student
@@ -209,6 +225,23 @@ public class StudentLocalServiceWrapper implements StudentLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _studentLocalService.getPersistedModel(primaryKeyObj);
+	}
+
+	/**
+	* Returns the student with the matching UUID and company.
+	*
+	* @param uuid the student's UUID
+	* @param companyId the primary key of the company
+	* @return the matching student
+	* @throws PortalException if a matching student could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public com.codeengine.studentmanagement.model.Student getStudentByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _studentLocalService.getStudentByUuidAndCompanyId(uuid, companyId);
 	}
 
 	/**
@@ -295,10 +328,22 @@ public class StudentLocalServiceWrapper implements StudentLocalService,
 	*/
 	@Override
 	public com.codeengine.studentmanagement.model.Student addOrUpdateStudent(
-		long studentId, java.lang.String name, java.lang.String email)
+		long studentId, java.lang.String name, java.lang.String email,
+		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _studentLocalService.addOrUpdateStudent(studentId, name, email);
+		return _studentLocalService.addOrUpdateStudent(studentId, name, email,
+			companyId);
+	}
+
+	/**
+	* Delete student
+	*/
+	@Override
+	public void deleteStudentIndexer(long studentId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_studentLocalService.deleteStudentIndexer(studentId);
 	}
 
 	/**
@@ -308,8 +353,8 @@ public class StudentLocalServiceWrapper implements StudentLocalService,
 	*/
 	@Override
 	public java.util.List<com.codeengine.studentmanagement.model.Student> findByName(
-		java.lang.String name) throws java.lang.Exception {
-		return _studentLocalService.findByName(name);
+		java.lang.String name, long companyId) throws java.lang.Exception {
+		return _studentLocalService.findByName(name, companyId);
 	}
 
 	/**

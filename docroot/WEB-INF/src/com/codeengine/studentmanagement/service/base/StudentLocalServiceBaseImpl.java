@@ -215,6 +215,20 @@ public abstract class StudentLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the student with the matching UUID and company.
+	 *
+	 * @param uuid the student's UUID
+	 * @param  companyId the primary key of the company
+	 * @return the matching student, or <code>null</code> if a matching student could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Student fetchStudentByUuidAndCompanyId(String uuid, long companyId)
+		throws SystemException {
+		return studentPersistence.fetchByUuid_C_First(uuid, companyId, null);
+	}
+
+	/**
 	 * Returns the student with the primary key.
 	 *
 	 * @param userId the primary key of the student
@@ -232,6 +246,21 @@ public abstract class StudentLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException, SystemException {
 		return studentPersistence.findByPrimaryKey(primaryKeyObj);
+	}
+
+	/**
+	 * Returns the student with the matching UUID and company.
+	 *
+	 * @param uuid the student's UUID
+	 * @param  companyId the primary key of the company
+	 * @return the matching student
+	 * @throws PortalException if a matching student could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Student getStudentByUuidAndCompanyId(String uuid, long companyId)
+		throws PortalException, SystemException {
+		return studentPersistence.findByUuid_C_First(uuid, companyId, null);
 	}
 
 	/**

@@ -56,6 +56,7 @@ public class StudentWrapper implements Student, ModelWrapper<Student> {
 		attributes.put("createDate", getCreateDate());
 		attributes.put("schoolId", getSchoolId());
 		attributes.put("clazzId", getClazzId());
+		attributes.put("companyId", getCompanyId());
 
 		return attributes;
 	}
@@ -102,6 +103,12 @@ public class StudentWrapper implements Student, ModelWrapper<Student> {
 
 		if (clazzId != null) {
 			setClazzId(clazzId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 	}
 
@@ -285,6 +292,26 @@ public class StudentWrapper implements Student, ModelWrapper<Student> {
 	@Override
 	public void setClazzId(long clazzId) {
 		_student.setClazzId(clazzId);
+	}
+
+	/**
+	* Returns the company ID of this student.
+	*
+	* @return the company ID of this student
+	*/
+	@Override
+	public long getCompanyId() {
+		return _student.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this student.
+	*
+	* @param companyId the company ID of this student
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_student.setCompanyId(companyId);
 	}
 
 	@Override

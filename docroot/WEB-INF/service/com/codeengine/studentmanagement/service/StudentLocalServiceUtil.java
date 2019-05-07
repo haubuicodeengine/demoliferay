@@ -187,6 +187,20 @@ public class StudentLocalServiceUtil {
 	}
 
 	/**
+	* Returns the student with the matching UUID and company.
+	*
+	* @param uuid the student's UUID
+	* @param companyId the primary key of the company
+	* @return the matching student, or <code>null</code> if a matching student could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.codeengine.studentmanagement.model.Student fetchStudentByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchStudentByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
 	* Returns the student with the primary key.
 	*
 	* @param userId the primary key of the student
@@ -206,6 +220,22 @@ public class StudentLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPersistedModel(primaryKeyObj);
+	}
+
+	/**
+	* Returns the student with the matching UUID and company.
+	*
+	* @param uuid the student's UUID
+	* @param companyId the primary key of the company
+	* @return the matching student
+	* @throws PortalException if a matching student could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.codeengine.studentmanagement.model.Student getStudentByUuidAndCompanyId(
+		java.lang.String uuid, long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStudentByUuidAndCompanyId(uuid, companyId);
 	}
 
 	/**
@@ -285,10 +315,20 @@ public class StudentLocalServiceUtil {
 	* @throws PortalException
 	*/
 	public static com.codeengine.studentmanagement.model.Student addOrUpdateStudent(
-		long studentId, java.lang.String name, java.lang.String email)
+		long studentId, java.lang.String name, java.lang.String email,
+		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addOrUpdateStudent(studentId, name, email);
+		return getService().addOrUpdateStudent(studentId, name, email, companyId);
+	}
+
+	/**
+	* Delete student
+	*/
+	public static void deleteStudentIndexer(long studentId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStudentIndexer(studentId);
 	}
 
 	/**
@@ -297,8 +337,8 @@ public class StudentLocalServiceUtil {
 	* @throws Exception
 	*/
 	public static java.util.List<com.codeengine.studentmanagement.model.Student> findByName(
-		java.lang.String name) throws java.lang.Exception {
-		return getService().findByName(name);
+		java.lang.String name, long companyId) throws java.lang.Exception {
+		return getService().findByName(name, companyId);
 	}
 
 	/**

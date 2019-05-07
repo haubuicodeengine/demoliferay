@@ -19,5 +19,6 @@
 		<field name="createDate" type="Date" />
 		<field name="schoolId" type="long" />
 		<field name="clazzId" type="long" />
+		<field name="companyId" type="long" />
 	</model>
 </model-hints>

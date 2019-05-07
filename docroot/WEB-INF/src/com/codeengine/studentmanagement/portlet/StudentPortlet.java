@@ -5,20 +5,11 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.portlet.*;
-import javax.servlet.http.HttpServletRequest;
-
 import com.codeengine.studentmanagement.exception.StudentException;
 import com.codeengine.studentmanagement.model.Student;
 import com.codeengine.studentmanagement.service.StudentLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;

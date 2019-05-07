@@ -81,6 +81,7 @@ public class StudentClp extends BaseModelImpl<Student> implements Student {
 		attributes.put("createDate", getCreateDate());
 		attributes.put("schoolId", getSchoolId());
 		attributes.put("clazzId", getClazzId());
+		attributes.put("companyId", getCompanyId());
 
 		return attributes;
 	}
@@ -127,6 +128,12 @@ public class StudentClp extends BaseModelImpl<Student> implements Student {
 
 		if (clazzId != null) {
 			setClazzId(clazzId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 	}
 
@@ -301,6 +308,29 @@ public class StudentClp extends BaseModelImpl<Student> implements Student {
 		}
 	}
 
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_studentRemoteModel != null) {
+			try {
+				Class<?> clazz = _studentRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_studentRemoteModel, companyId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getStudentRemoteModel() {
 		return _studentRemoteModel;
 	}
@@ -377,6 +407,7 @@ public class StudentClp extends BaseModelImpl<Student> implements Student {
 		clone.setCreateDate(getCreateDate());
 		clone.setSchoolId(getSchoolId());
 		clone.setClazzId(getClazzId());
+		clone.setCompanyId(getCompanyId());
 
 		return clone;
 	}
@@ -429,7 +460,7 @@ public class StudentClp extends BaseModelImpl<Student> implements Student {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -445,6 +476,8 @@ public class StudentClp extends BaseModelImpl<Student> implements Student {
 		sb.append(getSchoolId());
 		sb.append(", clazzId=");
 		sb.append(getClazzId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append("}");
 
 		return sb.toString();
@@ -452,7 +485,7 @@ public class StudentClp extends BaseModelImpl<Student> implements Student {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.codeengine.studentmanagement.model.Student");
@@ -486,6 +519,10 @@ public class StudentClp extends BaseModelImpl<Student> implements Student {
 			"<column><column-name>clazzId</column-name><column-value><![CDATA[");
 		sb.append(getClazzId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -500,6 +537,7 @@ public class StudentClp extends BaseModelImpl<Student> implements Student {
 	private Date _createDate;
 	private long _schoolId;
 	private long _clazzId;
+	private long _companyId;
 	private BaseModel<?> _studentRemoteModel;
 	private Class<?> _clpSerializerClass = com.codeengine.studentmanagement.service.ClpSerializer.class;
 }

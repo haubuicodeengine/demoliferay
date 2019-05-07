@@ -72,9 +72,10 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 			{ "email", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "schoolId", Types.BIGINT },
-			{ "clazzId", Types.BIGINT }
+			{ "clazzId", Types.BIGINT },
+			{ "companyId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table GB_Student (uuid_ VARCHAR(75) null,userId LONG not null primary key,name VARCHAR(75) null,email VARCHAR(75) null,createDate DATE null,schoolId LONG,clazzId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table GB_Student (uuid_ VARCHAR(75) null,userId LONG not null primary key,name VARCHAR(75) null,email VARCHAR(75) null,createDate DATE null,schoolId LONG,clazzId LONG,companyId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table GB_Student";
 	public static final String ORDER_BY_JPQL = " ORDER BY student.userId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY GB_Student.userId ASC";
@@ -90,8 +91,9 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.codeengine.studentmanagement.model.Student"),
 			true);
-	public static long UUID_COLUMN_BITMASK = 1L;
-	public static long USERID_COLUMN_BITMASK = 2L;
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
+	public static long UUID_COLUMN_BITMASK = 2L;
+	public static long USERID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -113,6 +115,7 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setSchoolId(soapModel.getSchoolId());
 		model.setClazzId(soapModel.getClazzId());
+		model.setCompanyId(soapModel.getCompanyId());
 
 		return model;
 	}
@@ -184,6 +187,7 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("schoolId", getSchoolId());
 		attributes.put("clazzId", getClazzId());
+		attributes.put("companyId", getCompanyId());
 
 		return attributes;
 	}
@@ -230,6 +234,12 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 
 		if (clazzId != null) {
 			setClazzId(clazzId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 	}
 
@@ -343,13 +353,36 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 		_clazzId = clazzId;
 	}
 
+	@JSON
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
+		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			Student.class.getName(), getPrimaryKey());
 	}
 
@@ -381,6 +414,7 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 		studentImpl.setCreateDate(getCreateDate());
 		studentImpl.setSchoolId(getSchoolId());
 		studentImpl.setClazzId(getClazzId());
+		studentImpl.setCompanyId(getCompanyId());
 
 		studentImpl.resetOriginalValues();
 
@@ -435,6 +469,10 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 
 		studentModelImpl._originalUuid = studentModelImpl._uuid;
 
+		studentModelImpl._originalCompanyId = studentModelImpl._companyId;
+
+		studentModelImpl._setOriginalCompanyId = false;
+
 		studentModelImpl._columnBitmask = 0;
 	}
 
@@ -481,12 +519,14 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 
 		studentCacheModel.clazzId = getClazzId();
 
+		studentCacheModel.companyId = getCompanyId();
+
 		return studentCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -502,6 +542,8 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 		sb.append(getSchoolId());
 		sb.append(", clazzId=");
 		sb.append(getClazzId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append("}");
 
 		return sb.toString();
@@ -509,7 +551,7 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.codeengine.studentmanagement.model.Student");
@@ -543,6 +585,10 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 			"<column><column-name>clazzId</column-name><column-value><![CDATA[");
 		sb.append(getClazzId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -562,6 +608,9 @@ public class StudentModelImpl extends BaseModelImpl<Student>
 	private Date _createDate;
 	private long _schoolId;
 	private long _clazzId;
+	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _columnBitmask;
 	private Student _escapedModel;
 }

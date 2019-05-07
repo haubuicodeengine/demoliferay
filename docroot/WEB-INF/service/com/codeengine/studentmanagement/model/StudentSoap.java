@@ -38,6 +38,7 @@ public class StudentSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setSchoolId(model.getSchoolId());
 		soapModel.setClazzId(model.getClazzId());
+		soapModel.setCompanyId(model.getCompanyId());
 
 		return soapModel;
 	}
@@ -146,6 +147,14 @@ public class StudentSoap implements Serializable {
 		_clazzId = clazzId;
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	private String _uuid;
 	private long _userId;
 	private String _name;
@@ -153,4 +162,5 @@ public class StudentSoap implements Serializable {
 	private Date _createDate;
 	private long _schoolId;
 	private long _clazzId;
+	private long _companyId;
 }

@@ -44,6 +44,7 @@
 			</basic>
 			<basic name="schoolId" />
 			<basic name="clazzId" />
+			<basic name="companyId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

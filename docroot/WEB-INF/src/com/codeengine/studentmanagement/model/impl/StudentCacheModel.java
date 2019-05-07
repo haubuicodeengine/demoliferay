@@ -37,7 +37,7 @@ import java.util.Date;
 public class StudentCacheModel implements CacheModel<Student>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -53,6 +53,8 @@ public class StudentCacheModel implements CacheModel<Student>, Externalizable {
 		sb.append(schoolId);
 		sb.append(", clazzId=");
 		sb.append(clazzId);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append("}");
 
 		return sb.toString();
@@ -94,6 +96,7 @@ public class StudentCacheModel implements CacheModel<Student>, Externalizable {
 
 		studentImpl.setSchoolId(schoolId);
 		studentImpl.setClazzId(clazzId);
+		studentImpl.setCompanyId(companyId);
 
 		studentImpl.resetOriginalValues();
 
@@ -109,6 +112,7 @@ public class StudentCacheModel implements CacheModel<Student>, Externalizable {
 		createDate = objectInput.readLong();
 		schoolId = objectInput.readLong();
 		clazzId = objectInput.readLong();
+		companyId = objectInput.readLong();
 	}
 
 	@Override
@@ -140,6 +144,7 @@ public class StudentCacheModel implements CacheModel<Student>, Externalizable {
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(schoolId);
 		objectOutput.writeLong(clazzId);
+		objectOutput.writeLong(companyId);
 	}
 
 	public String uuid;
@@ -149,4 +154,5 @@ public class StudentCacheModel implements CacheModel<Student>, Externalizable {
 	public long createDate;
 	public long schoolId;
 	public long clazzId;
+	public long companyId;
 }

@@ -17,5 +17,6 @@ create table GB_Student (
 	email VARCHAR(75) null,
 	createDate DATE null,
 	schoolId LONG,
-	clazzId LONG
+	clazzId LONG,
+	companyId LONG
 );

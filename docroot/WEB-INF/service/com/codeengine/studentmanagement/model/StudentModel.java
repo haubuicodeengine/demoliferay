@@ -176,6 +176,20 @@ public interface StudentModel extends BaseModel<Student> {
 	 */
 	public void setClazzId(long clazzId);
 
+	/**
+	 * Returns the company ID of this student.
+	 *
+	 * @return the company ID of this student
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this student.
+	 *
+	 * @param companyId the company ID of this student
+	 */
+	public void setCompanyId(long companyId);
+
 	@Override
 	public boolean isNew();
 
